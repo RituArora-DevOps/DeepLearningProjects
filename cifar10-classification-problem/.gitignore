@@ -1,0 +1,7 @@
+.DS_Store
+node_modules
+.tmp
+npm-debug.log
+
+# Ignore all files in the output/slides directory
+output/slides/

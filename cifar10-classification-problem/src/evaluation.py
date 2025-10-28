@@ -1,9 +1,9 @@
-# 03_04_begin.py
-
 # Import necessary libraries
 import os
 import numpy as np
 import tensorflow as tf
+import matplotlib.pyplot as plt
+import seaborn as sns
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.utils import to_categorical
 from sklearn.metrics import classification_report, confusion_matrix
@@ -34,6 +34,16 @@ if not os.path.exists(output_dir):
 # Define the model path
 model_path = os.path.join(output_dir, 'cifar10_system_model.h5')
 
+# Define the plot directory within the output directory
+plot_path = os.path.join(output_dir, 'plots')
+
+# Create the directory if it doesn't exist
+if not os.path.exists(plot_path):
+    os.makedirs(plot_path)
+
+# Define the file path to save the confusion matrix plot
+conf_matrix_plot_file = os.path.join(plot_path, '03_04_confusion_matrix.png')
+
 # Check if the model already exists
 if os.path.isfile(model_path):
     # Load the pre-trained model
@@ -45,6 +55,27 @@ if os.path.isfile(model_path):
     print(f"Test accuracy: {test_accuracy}")
 
     # Predict the classes for the test data
+    y_pred = np.argmax(model.predict(X_test), axis=1)
+    y_true = np.argmax(y_test, axis=1)
+
+    # Generate a classification report
+    class_report = classification_report(y_true, y_pred, target_names=[
+        'airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'])
+    print("Classification Report:\n", class_report)
+
+    # Generate a confusion matrix
+    conf_matrix = confusion_matrix(y_true, y_pred)
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=[
+        'airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'], yticklabels=[
+        'airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'])
+    plt.xlabel('Predicted')
+    plt.ylabel('True')
+    plt.title('Confusion Matrix')
+    
+    # Save the confusion matrix plot to a file
+    plt.savefig(conf_matrix_plot_file)
+
 else:
     print(f"Model not found at {model_path}. Please ensure the model is trained and saved correctly.")
 
