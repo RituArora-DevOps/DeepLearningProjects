@@ -5,8 +5,8 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 __version__ = "0.0.0"
 
-REPO_NAME = "kidney-Disease-Classification-Deep-Learning-Project"
-AUTHOR_USER_NAME = "rituarora-devops"
+REPO_NAME = "DeepLearningProjects/kidney-Disease-Classification-Deep-Learning-Project"
+AUTHOR_USER_NAME = "RituArora-Devops"
 SRC_REPO = "kidney_disease_classification"
 AUTHOR_EMAIL = "jsr.ritu.jsr@gmail.com"
 

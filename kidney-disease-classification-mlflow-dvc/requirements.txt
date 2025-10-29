@@ -11,7 +11,8 @@ pyYAML
 tqdm
 ensure==1.0.2
 joblib
-types-pyYAMLscipy
+types-pyYAML
+scipy
 Flask
 Flask-cors
 gdown  # to read data from google drive
